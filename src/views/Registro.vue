@@ -95,12 +95,14 @@ export default {
       email: "",
       nombre: "",
       apellido: "",
-      tipo:""
+      tipo:"",
+      error: ""
     };
   },
   methods: {
     async handleSubmit() {
-      const response = await axios.post("registro", {
+    try{
+       await axios.post('register', {
         user: this.user,
         password: this.password,
         confpassword: this.confpassword,
@@ -109,8 +111,12 @@ export default {
         apellido: this.apellido,
         tipo: this.tipo
       });
+        this.$router.push('/login')
+      } catch (e){
+this.error = 'Error'
+      }
 
-      console.log(response);
+      
     },
   },
 };

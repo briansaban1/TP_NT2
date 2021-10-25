@@ -2,7 +2,15 @@
   <div id="log">
     <b-container style="width: 300px">
       <form @submit.prevent="handleSubmit">
+
+
         <h3 style="margin: 20px">Iniciar Sesión</h3>
+
+        <div v-if="error" class="alert alert-danger" role="alert">
+
+            {{error}}
+
+        </div>
 
         <b-form-group>
           <label>Nombre de Usuario</label>
@@ -50,13 +58,20 @@ export default {
   },
   methods: {
     async handleSubmit() {
+        try{
       const response = await axios.post('login', {
         user: this.user,
         password: this.password,
       });
       localStorage.setItem("token", response.data.token);
+
+      this.$store.dispatch('user', response.data.user);
+
       this.$router.push("/");
-      console.log(response);
+      } catch(e){
+          this.error = 'Usuario Inválido'
+      }
+     
     },
   },
 };

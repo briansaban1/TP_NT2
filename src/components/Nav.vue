@@ -17,7 +17,7 @@
 
           <!-- Right aligned nav items -->
         <div id="login" >
-          <b-navbar-nav class="ml-auto" >
+          <b-navbar-nav class="ml-auto" v-if="!user" >
             <b-nav-item>
                <router-link class="nav-link" to="login"> Iniciar Sesión </router-link>
             </b-nav-item>
@@ -26,6 +26,17 @@
                <router-link class="nav-link" to="registro"> Registrate </router-link>
             </b-nav-item>
           </b-navbar-nav>
+
+<b-navbar-nav class="ml-auto" v-if="user" >
+            <b-nav-item>
+               <router-link class="nav-link" to="login"> Mi Perfil </router-link>
+            </b-nav-item>
+
+            <b-nav-item>
+               <router-link class="nav-link" href="javascript:void(0)" @click="handleClick"> Cerrar Sesión </router-link>
+            </b-nav-item>
+          </b-navbar-nav>
+
        </div>
         </b-collapse>
       </b-container>
@@ -37,11 +48,21 @@
 </template>
 
 <script>
-
+import {mapGetters} from 'vuex'
 export default {
   name: 'nav',
-  
+  methods:{
+      handleClick(){
+          localStorage.removeItem('token');
+          this.$store.dispatch('user', null)
+          this.$router.push('/')
+      }
+  },
+  computed:{
+      ...mapGetters(['user'])
+  }
 }
+
 </script>
 
 
