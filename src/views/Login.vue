@@ -1,15 +1,11 @@
 <template >
   <div id="log">
     <b-container style="width: 300px">
-      <form @submit.prevent="handleSubmit">
-
-
+      <form @submit.prevent="submit">
         <h3 style="margin: 20px">Iniciar Sesión</h3>
 
         <div v-if="error" class="alert alert-danger" role="alert">
-
-            {{error}}
-
+          {{ error }}
         </div>
 
         <b-form-group>
@@ -45,33 +41,30 @@ import axios from "axios";
 
 export default {
   name: "Login",
-  components:{
-
-  },
-  data: function() {
+  components: {},
+  data: function () {
     return {
       user: '',
       password: '',
       error: false,
-      error_msg:""
+      error_msg: '',
     };
   },
   methods: {
-    async handleSubmit() {
-        try{
-      const response = await axios.post('login', {
-        user: this.user,
-        password: this.password,
-      });
-      localStorage.setItem("token", response.data.token);
+    async submit() {
+      try {
+        const response = await axios.post("login", {
+          user: this.user,
+          password: this.password,
+        });
+        localStorage.setItem("token", response.data.token);
 
-      this.$store.dispatch('user', response.data.user);
+        this.$store.dispatch("user", response.data.user);
 
-      this.$router.push("/");
-      } catch(e){
-          this.error = 'Usuario Inválido'
+        this.$router.push("/");
+      } catch (e) {
+        this.error = "Usuario Inválido";
       }
-     
     },
   },
 };
