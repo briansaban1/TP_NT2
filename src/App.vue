@@ -11,7 +11,7 @@
 <script>
 import Nav from './components/Nav.vue'
 import Footer from './components/Footer.vue'
-import axios from 'axios'
+import axios from './axios'
 
 export default {
   name: 'App',
