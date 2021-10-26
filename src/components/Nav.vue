@@ -2,7 +2,7 @@
   <div id="app">
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-container>
-        <b-navbar-brand>ORTY-Service</b-navbar-brand>
+        <b-navbar-brand>ORTYFY-Service</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
