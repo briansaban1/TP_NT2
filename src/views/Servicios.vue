@@ -1,5 +1,20 @@
 <template>
   <div class="servicios">
-    <h1>Servicios</h1>
+    <ImgServicio />
+    <CuadrosServicio />
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+import ImgServicio from '../components/ImgServicio.vue'
+import CuadrosServicio from '../components/CuadrosServicio.vue'
+
+export default {
+  name: 'Home',
+  components: {
+    ImgServicio,
+    CuadrosServicio
+  }
+}
+</script>
