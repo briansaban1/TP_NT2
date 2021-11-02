@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Nav :user="user" />
+    <Nav />
 
     
    
@@ -11,7 +11,6 @@
 <script>
 import Nav from './components/Nav.vue'
 import Footer from './components/Footer.vue'
-import axios from './axios'
 
 export default {
   name: 'App',
@@ -20,11 +19,7 @@ export default {
     Footer
   },
   
-  async created(){
-    const response = await axios.get('user');
-    this.$store.dispatch('user', response.data)
-  }
-  
+
 }
 </script>
 

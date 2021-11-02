@@ -1,7 +1,7 @@
 <template >
   <div id="reg">
     <b-container style="width: 300px">
-      <form @submit.prevent="handleSubmit">
+      <form>
         <h3 style="margin: 20px">Registrate</h3>
 
         <b-form-group>
@@ -74,7 +74,10 @@
         </b-form-group>
 
         <div style="margin: 20px">
-          <b-button class="btn btn-primary btn-block">Registrate</b-button>
+          <b-input type="button" @click="signUp" value="Registrarse" class="btn btn-primary btn-block" />
+        </div>
+        <div>
+          <p v-if="msg">{{ msg }}</p>
         </div>
       </form>
     </b-container>
@@ -83,7 +86,7 @@
 </template>
 
 <script>
-import axios from "../axios";
+import AuthService from '@/services/AuthService.js';
 
 export default {
   name: "Registro",
@@ -96,13 +99,13 @@ export default {
       nombre: "",
       apellido: "",
       tipo:"",
-      error: ""
+      msg: ""
     };
   },
   methods: {
-    async handleSubmit() {
+    async signUp() {
     try{
-       await axios.post('register', {
+       const credentials = {
         user: this.user,
         password: this.password,
         confpassword: this.confpassword,
@@ -110,16 +113,19 @@ export default {
         nombre: this.nombre,
         apellido: this.apellido,
         tipo: this.tipo
-      });
-        this.$router.push('/login')
+      };
+        const response = await AuthService.signUp(credentials);
+        this.msg = response.msg;
+        this.$router.push('/login');
       } catch (e){
-this.error = 'Error'
+         this.msg = e.response.data.msg
       }
 
       
     },
   },
 };
+
 </script>
 
 <style>

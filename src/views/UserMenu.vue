@@ -1,18 +1,31 @@
 <template>
-<div>
-<h3 v-if="user">Hola, {{user.nombre}} {{user.apellido}}</h3>
-    <h3 v-if="!user">No estás logeado</h3>
-    </div>
+  <div>
+    <h1>Hi {{ user }}</h1>
+    <p>{{ secretMessage }}</p>
+    <input type="button" value="Logout" @click="logout" />
+  </div>
 </template>
-
 <script>
-import {mapGetters} from 'vuex'
-
+import AuthService from '@/services/AuthService.js';
 export default {
-    name: 'UserMenu',
-    
-    computed:{
-        ...mapGetters(['user'])
+  data() {
+    return {
+      secretMessage: '',
+      user: ''
+    };
+  },
+  async created() {
+    if (!this.$store.getters.isLoggedIn) {
+      this.$router.push('/login');
     }
-}
+    this.user = this.$store.getters.getUser.user;
+    this.secretMessage = await AuthService.getSecretContent();
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.push('/login');
+    }
+  }
+};
 </script>

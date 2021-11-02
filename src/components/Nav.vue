@@ -17,7 +17,7 @@
 
           <!-- Right aligned nav items -->
         <div id="login" >
-          <b-navbar-nav class="ml-auto" v-if="!user" >
+          <b-navbar-nav class="ml-auto" v-if="!isLoggedIn" >
             <b-nav-item>
                <router-link class="nav-link" to="login"> Iniciar Sesión </router-link>
             </b-nav-item>
@@ -27,13 +27,13 @@
             </b-nav-item>
           </b-navbar-nav>
 
-<b-navbar-nav class="ml-auto" v-if="user" >
+<b-navbar-nav class="ml-auto" v-if="isLoggedIn" >
             <b-nav-item>
-               <router-link class="nav-link" to="login"> Mi Perfil </router-link>
+               <router-link class="nav-link" to="UserMenu"> Mi Perfil </router-link>
             </b-nav-item>
 
             <b-nav-item>
-               <router-link class="nav-link" href="javascript:void(0)" @click="handleClick"> Cerrar Sesión </router-link>
+               <router-link class="nav-link" @click="logout()"> Cerrar Sesión </router-link>
             </b-nav-item>
           </b-navbar-nav>
 
@@ -48,19 +48,22 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
 export default {
+  
   name: 'nav',
-  methods:{
-      handleClick(){
-          localStorage.removeItem('token');
-          this.$store.dispatch('user', null)
-          this.$router.push('/')
-      }
+ computed: {
+    isLoggedIn: function() {
+      return this.$store.getters.isAuthenticated;
+    },
   },
-  computed:{
-      ...mapGetters(['user'])
-  }
+  methods: {
+    async logout() {
+      await this.$store.dispatch("LogOut");
+      this.$router.push("/login");
+    },
+  },
+
+  
 }
 
 </script>
