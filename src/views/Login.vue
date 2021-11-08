@@ -1,11 +1,11 @@
 <template >
   <div id="log">
     <b-container style="width: 300px">
-      <form @submit.prevent="submit">
+      <form>
         <h3 style="margin: 20px">Iniciar Sesión</h3>
 
-        <div v-if="error" class="alert alert-danger" role="alert">
-          {{ error }}
+        <div v-if="msg" class="alert alert-danger" role="alert">
+          {{ msg }}
         </div>
 
         <b-form-group>
@@ -13,7 +13,7 @@
           <b-input
             type="text"
             class="form-control"
-            v-model="user"
+            v-model="username"
             placeholder="Usuario"
           />
         </b-form-group>
@@ -37,33 +37,38 @@
 </template>
 
 <script>
-import axios from "../axios";
+import AuthService from '../services/AuthService.js';
 
 export default {
   name: "Login",
   components: {},
   data: function () {
     return {
-      user: '',
+      username: '',
       password: '',
-      error: false,
-      error_msg: '',
+      msg: '',
     };
   },
   methods: {
-    async submit() {
+    async login() {
       try {
-        const response = await axios.post("login", {
-          user: this.user,
+        const credentials = {
+          user: this.username,
           password: this.password,
-        });
-        localStorage.setItem("token", response.data.token);
+        };
+       const response = await AuthService.login(credentials);
+       this.msg = response.msg
 
-        this.$store.dispatch("user", response.data.user);
+       const token = response.token
+       const user = response.user
 
-        this.$router.push("/");
+       this.$store.dispatch('login', {token, user});
+
+       console.log(user)
+
+        this.$router.push("/UserMenu");
       } catch (e) {
-        this.error = "Usuario Inválido";
+        this.msg = e.response.data.msg
       }
     },
   },

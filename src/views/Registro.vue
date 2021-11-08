@@ -7,7 +7,8 @@
       <li v-for="(error, index) in errors" :key="error">{{ index }} - {{ error }}</li>
     </ul>
   </p>
-      <form @submit.prevent="handleSubmit">
+      <form>
+
         <h3 style="margin: 20px">Registrate</h3>
 
         <b-form-group>
@@ -80,7 +81,10 @@
         </b-form-group>
 
         <div style="margin: 20px">
-          <b-button class="btn btn-primary btn-block" type="submit" :disabled=isCompleted>Registrate</b-button>
+          <b-input type="button" @click="signUp" value="Registrarse" :disabled=isCompleted  class="btn btn-primary btn-block" />
+        </div>
+        <div>
+          <p v-if="msg">{{ msg }}</p>
         </div>
       </form>
     </b-container>
@@ -89,7 +93,7 @@
 </template>
 
 <script>
-import axios from "../axios";
+import AuthService from '../services/AuthService.js';
 
 export default {
   name: "Registro",
@@ -102,11 +106,12 @@ export default {
       nombre: "",
       apellido: "",
       tipo:"",
-      errors: []
+      errors: [],
+      msg: ""
     };
   },
   methods: {
-    async handleSubmit() {
+    async signUp() {
     try{
       this.errors = [];
 
@@ -117,23 +122,24 @@ export default {
       }
 
       if(!this.errors.length){
-       await axios.post('register', {
-        user: this.user,
-        password: this.password,
-        confpassword: this.confpassword,
-        email: this.email,
-        nombre: this.nombre,
-        apellido: this.apellido,
-        tipo: this.tipo
-      });
-        this.$router.push('/login')
+        const credentials = {
+          user: this.user,
+          password: this.password,
+          confpassword: this.confpassword,
+          email: this.email,
+          nombre: this.nombre,
+          apellido: this.apellido,
+          tipo: this.tipo
+        };
+          const response = await AuthService.signUp(credentials);
+          this.msg = response.msg;
+          this.$router.push('/login');
       }
 
       } catch (e){
-        this.errors.push(e);
+        this.errors.push(e.response.data.msg);
       }
 
-      
     },
     validEmail: function (email) {
       // eslint-disable-next-line
@@ -147,6 +153,7 @@ export default {
     }
   }
 };
+
 </script>
 
 <style>
