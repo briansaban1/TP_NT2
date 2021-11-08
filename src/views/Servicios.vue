@@ -1,7 +1,7 @@
 <template>
   <div class="servicios">
     <ImgServicio />
-    <CuadrosServicio />
+    <CuadrosServicio :services="services" />
   </div>
 </template>
 
@@ -12,6 +12,11 @@ import CuadrosServicio from '../components/CuadrosServicio.vue'
 
 export default {
   name: 'Home',
+  data() {
+    return {
+      services: [{name:"test1",desc:"desc1",img:"url"},{name:"test2",desc:"desc2",img:"url"}]
+    }
+  },
   components: {
     ImgServicio,
     CuadrosServicio
