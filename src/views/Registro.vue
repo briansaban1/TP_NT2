@@ -1,7 +1,14 @@
 <template >
   <div id="reg">
     <b-container style="width: 300px">
+      <p v-if="errors.length">
+    <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+    <ul>
+      <li v-for="(error, index) in errors" :key="error">{{ index }} - {{ error }}</li>
+    </ul>
+  </p>
       <form>
+
         <h3 style="margin: 20px">Registrate</h3>
 
         <b-form-group>
@@ -74,7 +81,7 @@
         </b-form-group>
 
         <div style="margin: 20px">
-          <b-input type="button" @click="signUp" value="Registrarse" class="btn btn-primary btn-block" />
+          <b-input type="button" @click="signUp" value="Registrarse" :disabled=isCompleted  class="btn btn-primary btn-block" />
         </div>
         <div>
           <p v-if="msg">{{ msg }}</p>
@@ -99,31 +106,52 @@ export default {
       nombre: "",
       apellido: "",
       tipo:"",
+      errors: [],
       msg: ""
     };
   },
   methods: {
     async signUp() {
     try{
-       const credentials = {
-        user: this.user,
-        password: this.password,
-        confpassword: this.confpassword,
-        email: this.email,
-        nombre: this.nombre,
-        apellido: this.apellido,
-        tipo: this.tipo
-      };
-        const response = await AuthService.signUp(credentials);
-        this.msg = response.msg;
-        this.$router.push('/login');
-      } catch (e){
-         this.msg = e.response.data.msg
+      this.errors = [];
+
+      if (!this.email) {
+        this.errors.push("El correo electrónico es obligatorio.");
+      } else if (!this.validEmail(this.email)) {
+        this.errors.push("El correo electrónico debe ser válido.");
       }
 
-      
+      if(!this.errors.length){
+        const credentials = {
+          user: this.user,
+          password: this.password,
+          confpassword: this.confpassword,
+          email: this.email,
+          nombre: this.nombre,
+          apellido: this.apellido,
+          tipo: this.tipo
+        };
+          const response = await AuthService.signUp(credentials);
+          this.msg = response.msg;
+          this.$router.push('/login');
+      }
+
+      } catch (e){
+        this.errors.push(e.response.data.msg);
+      }
+
     },
+    validEmail: function (email) {
+      // eslint-disable-next-line
+      var re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+      return re.test(email);
+    }
   },
+  computed: {
+    isCompleted(){
+      return this.user == "" || this.password == "" || this.confpassword == "" || this.email == "" || this.apellido == "" || this.tipo == "";
+    }
+  }
 };
 
 </script>
