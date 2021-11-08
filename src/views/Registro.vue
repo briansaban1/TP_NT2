@@ -1,6 +1,12 @@
 <template >
   <div id="reg">
     <b-container style="width: 300px">
+      <p v-if="errors.length">
+    <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+    <ul>
+      <li v-for="(error, index) in errors" :key="error">{{ index }} - {{ error }}</li>
+    </ul>
+  </p>
       <form @submit.prevent="handleSubmit">
         <h3 style="margin: 20px">Registrate</h3>
 
@@ -74,7 +80,7 @@
         </b-form-group>
 
         <div style="margin: 20px">
-          <b-button class="btn btn-primary btn-block">Registrate</b-button>
+          <b-button class="btn btn-primary btn-block" type="submit" :disabled=isCompleted>Registrate</b-button>
         </div>
       </form>
     </b-container>
@@ -96,12 +102,21 @@ export default {
       nombre: "",
       apellido: "",
       tipo:"",
-      error: ""
+      errors: []
     };
   },
   methods: {
     async handleSubmit() {
     try{
+      this.errors = [];
+
+      if (!this.email) {
+        this.errors.push("El correo electrónico es obligatorio.");
+      } else if (!this.validEmail(this.email)) {
+        this.errors.push("El correo electrónico debe ser válido.");
+      }
+
+      if(!this.errors.length){
        await axios.post('register', {
         user: this.user,
         password: this.password,
@@ -112,13 +127,25 @@ export default {
         tipo: this.tipo
       });
         this.$router.push('/login')
+      }
+
       } catch (e){
-this.error = 'Error'
+        this.errors.push(e);
       }
 
       
     },
+    validEmail: function (email) {
+      // eslint-disable-next-line
+      var re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+      return re.test(email);
+    }
   },
+  computed: {
+    isCompleted(){
+      return this.user == "" || this.password == "" || this.confpassword == "" || this.email == "" || this.apellido == "" || this.tipo == "";
+    }
+  }
 };
 </script>
 
