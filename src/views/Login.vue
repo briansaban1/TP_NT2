@@ -13,7 +13,7 @@
           <b-input
             type="text"
             class="form-control"
-            v-model="user"
+            v-model="username"
             placeholder="Usuario"
           />
         </b-form-group>
@@ -37,14 +37,14 @@
 </template>
 
 <script>
-import AuthService from '@/services/AuthService.js';
+import AuthService from '../services/AuthService.js';
 
 export default {
   name: "Login",
   components: {},
   data: function () {
     return {
-      user: '',
+      username: '',
       password: '',
       msg: '',
     };
@@ -53,7 +53,7 @@ export default {
     async login() {
       try {
         const credentials = {
-          user: this.user,
+          user: this.username,
           password: this.password,
         };
        const response = await AuthService.login(credentials);
@@ -63,6 +63,8 @@ export default {
        const user = response.user
 
        this.$store.dispatch('login', {token, user});
+
+       console.log(user)
 
         this.$router.push("/UserMenu");
       } catch (e) {

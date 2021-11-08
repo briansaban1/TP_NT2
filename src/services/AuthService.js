@@ -14,6 +14,8 @@ export default {
       .then(response => response.data);
   },
   getSecretContent() {
-    return axios.get(url + 'secret-route/').then(response => response.data);
+    return axios
+    .get(url + 'usuario/')
+    .then(response => response.data);
   }
 };

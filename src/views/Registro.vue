@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import AuthService from '@/services/AuthService.js';
+import AuthService from '../services/AuthService.js';
 
 export default {
   name: "Registro",

@@ -25,13 +25,19 @@ export default {
   },
   methods:{
     async getServicios(){
+      try{ 
       const url = "https://618072ba8bfae60017adfaec.mockapi.io/servicio"
       const response = await axios.get(url)
       this.servicios = response.data
       console.log(this.servicios)
+      }catch(error){
+        console.log(error)
+      }
     },
-  }
-  ,created(){this.getServicios()}
+  },
+  created(){
+    this.getServicios()
+    }
 };
 
 </script>

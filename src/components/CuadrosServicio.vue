@@ -4,11 +4,11 @@
 <div id="titulo">
 <h3>Listado de Servicios</h3>
 </div>
-        <b-container  > 
-  <b-card-group deck class="row">
-    <b-card class="mb-4" style="max-width: 18rem; margin:20px" title="{titulo}" img-src="https://picsum.photos/300/300/?image=41" img-alt="Image" img-top>
+        <b-container> 
+  <b-card-group deck class="row" >
+    <b-card v-bind:id="servicios.id" class="mb-4" style="max-width: 18rem; margin:20px" title="{}" img-src="https://picsum.photos/300/300/?image=41" img-alt="Image" img-top>
       <b-card-text>
-        {{servicio}}
+        {{servicios.description}}
       </b-card-text>
       <template #footer>
         <small class="text-muted">Last updated 3 mins ago</small>
@@ -100,12 +100,10 @@ export default{
   props: {
         servicios: {
             type: Array,
-            description: "servicio"
+            default: () => []
         }
     },
-    mounted(){
-      console.log(this.servicios);
-    }
+
 
 
 }
