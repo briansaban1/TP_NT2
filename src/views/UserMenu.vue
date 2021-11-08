@@ -1,6 +1,6 @@
 <template>
   <div id="userMenu">
-    <h1>Hola, {{this.username}}</h1>
+    <h1>Hola, {{username}}</h1>
     <p>Bienvenido a tu cuenta de ORTY-Service</p>
 
 <div v-if="tipo == 'vendedor'">
@@ -34,20 +34,13 @@ export default {
   data() {
     return {
       secretMessage: '',
-      username: '',
-      nombre: ''
+      username: ''
     };
   },
   async created() {
-   
-
+    
     this.username = this.$store.getters.getUser.username;
-    this.nombre = this.$store.getters.getUser.nombre;
-    console.log(this.username)
     this.secretMessage = await AuthService.getSecretContent();
-    console.log(this.secretMessage)
-
-   
   },
   methods: {
     logout() {

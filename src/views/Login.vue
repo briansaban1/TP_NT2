@@ -28,7 +28,7 @@
           />
         </b-form-group>
         <div style="margin: 20px">
-          <b-button class="btn btn-primary btn-block" :disabled=isCompleted>Iniciar Sesión</b-button>
+          <b-button @click="login" class="btn btn-primary btn-block" :disabled=isCompleted>Iniciar Sesión</b-button>
         </div>
       </form>
     </b-container>
@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     isCompleted(){
-      return this.user == "" || this.user.length < 4 || this.password == "";
+      return this.username == "" || (this.username.length) < 4 || this.password == "";
     }
   }
 };
