@@ -7,6 +7,8 @@ import Contacto from '../views/Contacto.vue'
 import Login from '../views/Login.vue'
 import Registro from '../views/Registro.vue'
 import UserMenu from '../views/UserMenu.vue'
+import CrearServicio from '../views/CrearServicio.vue'
+
 
 Vue.use(VueRouter)
 
@@ -62,7 +64,6 @@ export default new VueRouter ({
     // which is lazy-loaded when the route is visited.
     component: Registro
   },
-
   {
     path: '/usermenu',
     name: 'Usermenu',
@@ -70,6 +71,14 @@ export default new VueRouter ({
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: UserMenu
+  },
+  {
+    path: '/crearservicio',
+    name: 'CrearServicio',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: CrearServicio
   },
 ]
 
