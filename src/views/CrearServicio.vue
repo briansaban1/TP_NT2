@@ -1,6 +1,7 @@
 <template>
   <div id="userMenu">
     <div class="row" style="width: 100%">
+
       <b-container style="width: 450px; margin-top: 25px">
         <h1>Creá tu Servicio</h1>
 
@@ -32,6 +33,16 @@
               id="detalle"
               v-model="detalle"
               placeholder="Ingresá el detalle"
+            />
+          </div>
+          <div class="form-group">
+            <label for="message">Imagen Url</label>
+            <input
+              type="text"
+              class="form-control"
+              id="image"
+              v-model="image"
+              placeholder="Ingresá la imagen en formato url"
             />
           </div>
           <div class="form-group">
@@ -98,14 +109,10 @@
             </select>
           </div>
 
-          <p v-if="msg" class="submit">
-            Se ha creado el servicio exitosamente.
-          </p>
-
           <div class="row" align="center">
             <b-button
               style="margin: 20px"
-              type="submit"
+              type="button"
               @click="crearServicio()"
               class="btn btn-primary"
               >Aceptar</b-button
@@ -113,6 +120,9 @@
             
           </div>
         </form>
+        <p v-if="msg" class="submit">
+            Se ha creado el servicio exitosamente.
+          </p>
       </b-container>
     </div>
   </div>
@@ -130,13 +140,13 @@ export default {
       detalle: "",
       descripcion: "",
       rubro: "",
+      image: "",
       barrio: "",
       msg: false,
     };
   },
   mounted() {
     this.usuario = JSON.parse(window.localStorage.getItem("userData"));
-    console.log(this.usuario);
   },
   methods: {
     logout() {
@@ -144,6 +154,7 @@ export default {
       this.$router.push("/login");
     },
     async crearServicio() {
+ 
       try {
         const result = await axios.post(
           "https://618072ba8bfae60017adfaec.mockapi.io/servicio",
@@ -152,12 +163,12 @@ export default {
             descripcion: this.descripcion,
             detalle: this.detalle,
             rubro: this.rubro,
+            img: this.image,
             barrio: this.barrio,
             usuario: this.usuario.user
           }
         );
-        console.log(this.titulo)
-        console.log(result);
+        console.log("TEST RESULT ",result);
         this.msg = true;
       } catch (error) {
         console.log(error);
