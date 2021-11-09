@@ -1,30 +1,30 @@
 <template>
   <div id="userMenu">
+    <div class="row" style="width: 100%">
+   <b-container style="width: 500px; margin-top:25px;">
     <h1>Hola, {{ usuario.user }}!</h1>
     <p>Bienvenido a tu cuenta de ORTY-Service</p>
 
-    <ul>
-      <li>Nombre: {{ usuario.nombre }}</li>
-      <li>Apellido: {{ usuario.apellido }}</li>
-      <li>Email: {{ usuario.email }}</li>
-      <li>Usuario: {{ usuario.user }}</li>
-    </ul>
-
+    <div style="">
+      <p>Nombre: {{ usuario.nombre }}</p>
+      <p>Apellido: {{ usuario.apellido }}</p>
+      <p>Email: {{ usuario.email }}</p>
+      <p>Usuario: {{ usuario.user }}</p>
+      </div>
+</b-container>
+<b-container style="width: 300px; margin-top:15px; margin-left: 20px">
     <div v-if="usuario.tipo = 'vendedor'">
       <div style="margin: 20px">
-        <b-button @click="login" class="btn btn-primary btn-block"
-          >Crear Servicio</b-button
-        >
+        <router-link to="/CrearServicio" class="btn btn-primary btn-block"
+          >Crear Servicio</router-link>
       </div>
       <div style="margin: 20px">
-        <b-button @click="login" class="btn btn-primary btn-block"
-          >Listado de Servicios</b-button
-        >
+        <router-link to="/MisServicios" class="btn btn-primary btn-block"
+          >Mis Servicios</router-link>
       </div>
       <div style="margin: 20px">
-        <b-button @click="login" class="btn btn-primary btn-block"
-          >Eliminar Servicio</b-button
-        >
+        <router-link to="/EliminarServicio" class="btn btn-primary btn-block"
+          >Eliminar Servicio</router-link>
       </div>
     </div>
     <div v-else></div>
@@ -34,6 +34,11 @@
         >Cerrar Sesión</b-button
       >
     </div>
+
+</b-container>
+</div>
+
+    
   </div>
 </template>
 
