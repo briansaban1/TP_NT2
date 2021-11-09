@@ -5,7 +5,7 @@ const url = 'https://618072ba8bfae60017adfaec.mockapi.io/';
 export default {
   login(credentials) {
     return axios
-      .get(url + 'usuario/', credentials)
+      .post(url + 'usuario/', credentials)
       .then(response => response.data);
   },
   signUp(credentials) {

@@ -1,52 +1,59 @@
 <template>
   <div id="userMenu">
-    <h1>Hola, {{username}}</h1>
+    <h1>Hola, {{ usuario.user }}!</h1>
     <p>Bienvenido a tu cuenta de ORTY-Service</p>
 
-<div v-if="tipo == 'vendedor'">
-   <div style="margin: 20px">
-          <b-button @click="login" class="btn btn-primary btn-block">Crear Servicio</b-button>
-        </div>
-     <div style="margin: 20px">
-          <b-button @click="login" class="btn btn-primary btn-block">Listado de Servicios</b-button>
-        </div>
-     <div style="margin: 20px">
-          <b-button @click="login" class="btn btn-primary btn-block">Eliminar Servicio</b-button>
-        </div>
-   
+    <ul>
+      <li>Nombre: {{ usuario.nombre }}</li>
+      <li>Apellido: {{ usuario.apellido }}</li>
+      <li>Email: {{ usuario.email }}</li>
+      <li>Usuario: {{ usuario.user }}</li>
+    </ul>
 
-</div>
-<div v-else>
-  <div style="margin: 20px">
-          <b-button @click="login" class="btn btn-primary btn-block">Mi Perfil</b-button>
-        </div>
-</div>
+    <div v-if="usuario.tipo = 'vendedor'">
+      <div style="margin: 20px">
+        <b-button @click="login" class="btn btn-primary btn-block"
+          >Crear Servicio</b-button
+        >
+      </div>
+      <div style="margin: 20px">
+        <b-button @click="login" class="btn btn-primary btn-block"
+          >Listado de Servicios</b-button
+        >
+      </div>
+      <div style="margin: 20px">
+        <b-button @click="login" class="btn btn-primary btn-block"
+          >Eliminar Servicio</b-button
+        >
+      </div>
+    </div>
+    <div v-else></div>
 
-<div style="margin: 20px">
-          <b-button @click="logout" class="btn btn-primary btn-block">Cerrar Sesión</b-button>
-        </div>
+    <div style="margin: 20px">
+      <b-button @click="logout" class="btn btn-primary btn-block"
+        >Cerrar Sesión</b-button
+      >
+    </div>
   </div>
 </template>
 
 <script>
-import AuthService from '../services/AuthService.js';
 export default {
+  name: "UserMenu",
   data() {
     return {
-      secretMessage: '',
-      username: ''
+      usuario: [],
     };
   },
-  async created() {
-    
-    this.username = this.$store.getters.getUser.username;
-    this.secretMessage = await AuthService.getSecretContent();
+  mounted() {
+    this.usuario = JSON.parse(window.localStorage.getItem("userData"));
+    console.log(this.usuario);
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout');
-      this.$router.push('/login');
-    }
-  }
+      window.localStorage.removeItem("userData");
+      this.$router.push("/login");
+    },
+  },
 };
 </script>

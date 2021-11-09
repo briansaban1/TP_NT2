@@ -3,6 +3,8 @@ import App from './App.vue';
 import router from './router';
 import store from './store/index.js';
 import Axios from 'axios';
+import vueAxios from 'vue-axios'
+
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
@@ -11,10 +13,13 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.use(vueAxios, Axios)
+
 
 Vue.config.productionTip = false
 
- Axios.defaults.headers.common['Authorization'] = `Bearer ${store.state.token}`;
+
+
 
 
 new Vue({

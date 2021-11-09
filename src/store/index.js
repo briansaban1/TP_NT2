@@ -1,48 +1,72 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import Axios from 'axios';
-import createPersistedState from 'vuex-persistedstate';
+import Vue from "vue";
+    import Vuex from "vuex";
+    Vue.use(Vuex);
+const state = {
+    searchParam: '',
+    searchResults: [],
+    //bookmarks: JSON.parse(window.localStorage.getItem('bookmarks'))
+}
 
-Vue.use(Vuex);
+const getters = {
+    getSearchResults: state => state.searchResults,
 
-const getDefaultState = () => {
-  return {
-    token: '',
-    user: {}
-  };
-};
-export default new Vuex.Store({
-  strict: true,
-  plugins: [createPersistedState()],
-  state: getDefaultState(),
-  getters: {
-    isLoggedIn: state => {
-      return state.token;
-    },
-    getUser: state => {
-      return state.user;
+    getSearchParam: state => state.searchParam,
+
+    getBookmarks: state => {
+        return state.bookmarks
     }
-  },
-  mutations: {
-    SET_TOKEN: (state, token) => {
-      state.token = token;
+}
+
+const actions = {
+    async fetchSearchResult ({ commit }, searchItem) {
+         
+        const res = await Vue.axios.get(`https://api.edamam.com/search?q=${searchItem}&app_id=fff942a6&app_key=f8072cf215a378725c6fbe01b13b7364&from=0&to=20`)
+        console.log(res)
+        const results = res.data.hits
+        commit('updateSearchResults', results)
     },
-    SET_USER: (state, user) => {
-      state.user = user;
+
+    async fetchSearchItem ({ commit }, item) {
+        commit('updateSearchItem', item)
     },
-    RESET: state => {
-      Object.assign(state, getDefaultState());
-    }
-  },
-  actions: {
-    login: ({ commit }, { token, user }) => {
-      commit('SET_TOKEN', token);
-      commit('SET_USER', user);
-      // set auth header
-      Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+    // async addBookmark({ commit }, bookmarkItem) {
+    //     const bookmarks = JSON.parse(window.localStorage.getItem('userData')).bookmarks
+    //     bookmarks.length === 0 ? bookmarks.push(item) :
+    //         bookmarks.findIndex(recipe => recipe.label === item.label) === -1 ?
+    //             bookmarks.push(item) : ''
+    //     commit('updateBookmark', bookmarkItem)
+    // },
+
+    // async addBookmarkToBackend({ commit }, bookmarkItem) {
+        
+    // }
+}
+
+const mutations = {
+    updateSearchResults: (state, results) => {
+        state.searchResults = results
     },
-    logout: ({ commit }) => {
-      commit('RESET', '');
-    }
-  }
-});
+
+    updateSearchItem: (state, item) => {
+        state.searchParam = item
+    },
+
+    // updateBookmark: (state, item) => {
+    //     // console.log(`item`, state.bookmarks.find((recipe) => 
+    //     //         recipe.label === item.label))
+       
+    //     state.bookmarks.length === 0 ? state.bookmarks.push(item) :
+    //         state.bookmarks.findIndex(recipe => recipe.label === item.label) === -1 ?
+    //             state.bookmarks.push(item) : ''
+
+    
+    // }
+}
+
+export default {
+    state,
+    getters,
+    actions,
+    mutations
+}

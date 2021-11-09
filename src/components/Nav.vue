@@ -17,7 +17,7 @@
 
           <!-- Right aligned nav items -->
         <div id="login" >
-          <b-navbar-nav class="ml-auto" v-if="!isLoggedIn" >
+          <b-navbar-nav class="ml-auto" v-if="!usuario" >
             <b-nav-item>
                <router-link class="nav-link" to="login"> Iniciar Sesión </router-link>
             </b-nav-item>
@@ -27,13 +27,16 @@
             </b-nav-item>
           </b-navbar-nav>
 
-<b-navbar-nav class="ml-auto" v-if="isLoggedIn" >
+<b-navbar-nav class="ml-auto" v-else >
             <b-nav-item>
-               <router-link class="nav-link" to="UserMenu"> Mi Perfil </router-link>
-            </b-nav-item>
+              
 
-            <b-nav-item>
-               <router-link class="nav-link" @click="logout()"> Cerrar Sesión </router-link>
+               <router-link class="nav-link" to="UserMenu"> Mi Perfil</router-link>
+               </b-nav-item>
+                <b-nav-item>
+              <p class="nav-link" @click="logout()">Cerrar Sesión</p>
+
+            
             </b-nav-item>
           </b-navbar-nav>
 
@@ -49,23 +52,23 @@
 
 <script>
 export default {
-  
-  name: 'nav',
- computed: {
-    isLoggedIn: function() {
-      return this.$store.getters.isAuthenticated;
-    },
+  name: "NAV",
+  data() {
+    return {
+      usuario: [],
+    };
+  },
+  mounted() {
+    this.usuario = JSON.parse(window.localStorage.getItem("userData"));
+    console.log(this.usuario);
   },
   methods: {
-    async logout() {
-      await this.$store.dispatch("LogOut");
+    logout() {
+      window.localStorage.removeItem("userData");
       this.$router.push("/login");
     },
   },
-
-  
-}
-
+};
 </script>
 
 

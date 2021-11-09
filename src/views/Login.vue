@@ -4,10 +4,6 @@
       <form>
         <h3 style="margin: 20px">Iniciar Sesión</h3>
 
-        <div v-if="msg" class="alert alert-danger" role="alert">
-          {{ msg }}
-        </div>
-
         <b-form-group>
           <label>Nombre de Usuario</label>
           <b-input
@@ -27,56 +23,75 @@
             placeholder="Password"
           />
         </b-form-group>
+
+        <p v-if="error" class="error">
+          Has ingresado mal el email o la contraseña.
+        </p>
+
         <div style="margin: 20px">
-          <b-button @click="login" class="btn btn-primary btn-block" :disabled=isCompleted>Iniciar Sesión</b-button>
+          <b-button
+            @click="login"
+            class="btn btn-primary btn-block"
+            :disabled="isCompleted"
+            >Iniciar Sesión</b-button
+          >
         </div>
       </form>
+      <p class="msg">
+        ¿No tenés cuenta?
+        <router-link to="/registro">Registrate</router-link>
+      </p>
     </b-container>
     <router-view />
   </div>
 </template>
 
 <script>
-import AuthService from '../services/AuthService.js';
+import axios from "axios";
 
 export default {
   name: "Login",
   components: {},
   data: function () {
     return {
-      username: '',
-      password: '',
-      msg: '',
+      username: "",
+      password: "",
+      error: false,
     };
   },
   methods: {
-    async login() {
+    async login(e) {
+      e.preventDefault();
       try {
-        const credentials = {
-          user: this.username,
-          password: this.password,
-        };
-       const response = await AuthService.login(credentials);
-       this.msg = response.msg
+        const res = await axios.get(
+          `https://618072ba8bfae60017adfaec.mockapi.io/usuario?user=${this.username}&password=${this.password}`
+          );
 
-       const token = response.token
-       const user = response.user
+        console.log(res);
 
-       this.$store.dispatch('login', {token, user});
+if(res.data.length > 0) {
 
-       console.log(user)
+console.log(res.data)
+        window.localStorage.setItem("userData", JSON.stringify(res.data[0]));
+        //window.localStorage.setItem('bookmarks', JSON.stringify(user.bookmarks))
 
         this.$router.push("/UserMenu");
-      } catch (e) {
-        this.msg = e.response.data.msg
+        }else{
+          this.error = true;
+        }
+      } catch (error) {
+        this.error = true;
+        this.password = "";
       }
     },
   },
   computed: {
-    isCompleted(){
-      return this.username == "" || (this.username.length) < 4 || this.password == "";
-    }
-  }
+    isCompleted() {
+      return (
+        this.username == "" || this.username.length < 4 || this.password == ""
+      );
+    },
+  },
 };
 </script>
 
