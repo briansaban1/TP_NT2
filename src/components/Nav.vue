@@ -27,9 +27,9 @@
             </b-nav-item>
           </b-navbar-nav>
 
-<b-navbar-nav class="ml-auto" v-else >
+<b-navbar-nav style="margin-bottom:-20px" class="ml-auto" v-else >
             <b-nav-item>
-              
+
 
                <router-link class="nav-link" to="UserMenu"> Mi Perfil</router-link>
                </b-nav-item>
