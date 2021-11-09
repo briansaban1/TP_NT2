@@ -13,8 +13,8 @@
       <form>
           <b-form-group >
           <label style="margin-bottom:10px">Seleccioná un Barrio</label>
-          <select class="form-control" v-model="tipo">
-            <option disabled value="">Seleccioná un Tipo</option>
+          <select class="form-control" @change="handleBarrio" v-model="barrio" value="Todos">
+            <option selected=true>Todos</option>
             <option>Agronomía</option>
 <option>Almagro</option>
 <option>Balvanera</option>
@@ -67,14 +67,13 @@
           </select>
         </b-form-group>
 
-<b-form-group style="margin-top:12px">
+      <b-form-group style="margin-top:12px">
           <label style="margin-bottom:10px">Seleccioná un Servicio</label>
-          <select class="form-control" v-model="tipo">
-            <option disabled value="">Seleccioná un Tipo</option>
+          <select class="form-control" @change="handleRubro" v-model="rubro">
+            <option selected="true">Todos</option>
             <option>Plomería</option>
             <option>Electricista</option>
-            <option>Carpintero</option>
-            <option>...</option>
+            <option>Carpiteria</option>
           </select>
         </b-form-group>
 
@@ -85,3 +84,22 @@
 
 </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      barrio: "Todos",
+      rubro: "Todos"
+    }
+  },
+   methods: {
+    handleRubro() {
+      this.$emit("update:rubro",this.rubro);
+    },
+    handleBarrio() {
+      this.$emit("update:barrio",this.barrio);
+    }
+  }
+}
+</script>
