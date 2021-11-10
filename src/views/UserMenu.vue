@@ -3,7 +3,7 @@
     <div class="row" style="width: 100%">
    <b-container style="width: 500px; margin-top:25px;">
     <h1>Hola, {{ usuario.user }}!</h1>
-    <p>Bienvenido a tu cuenta de ORTY-Service</p>
+    <p>Bienvenido a tu cuenta de ORTYFY-Service</p>
 
     <div style="">
       <p>Nombre: {{ usuario.nombre }}</p>
