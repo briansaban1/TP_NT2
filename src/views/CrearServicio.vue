@@ -49,7 +49,7 @@
             <label for="category">Rubro</label>
             <select class="form-control" v-model="rubro" id="rubro">
               <option disabled value="">Seleccioná un Rubro</option>
-              <option>Carpiteria</option>
+              <option>Carpinteria</option>
               <option>Plomeria</option>
               <option>Electricista</option>
             </select>
