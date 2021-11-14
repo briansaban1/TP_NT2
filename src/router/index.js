@@ -9,6 +9,8 @@ import Registro from '../views/Registro.vue'
 import UserMenu from '../views/UserMenu.vue'
 import CrearServicio from '../views/CrearServicio.vue'
 import DetalleServicio from '../views/DetalleServicio.vue'
+import MisServicios from '../views/MisServicios.vue'
+import EliminarServicio from '../views/EliminarServicio.vue'
 
 
 Vue.use(VueRouter)
@@ -88,6 +90,22 @@ export default new VueRouter ({
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: DetalleServicio
+  },
+  {
+    path: '/misservicios',
+    name: 'MisServicios',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: MisServicios
+  },
+  {
+    path: '/eliminarservicio/:id',
+    name: 'EliminarServicio',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: EliminarServicio
   }
 ]
 

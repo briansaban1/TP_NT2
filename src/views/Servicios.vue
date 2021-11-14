@@ -14,6 +14,7 @@
           md="4"
           lg="3"
           class="align-center"
+          v-on:click="verServicio(servicio.id)"
         >
           <CuadrosServicio :servicio="servicio" />
         </b-col>
@@ -54,6 +55,10 @@ export default {
         console.log(error);
       }
     },
+  verServicio(id) {
+    this.$router.push({name: 'DetalleServicio', params: {id: id}});
+     console.log(id)
+  }
   },
   computed: {
   filteredServices() {
