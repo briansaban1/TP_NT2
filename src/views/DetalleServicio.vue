@@ -15,7 +15,7 @@
           </div>
 
           <div style="margin-top:20px; width: 50%; margin-left: 90px">
-         <h6 style="display: flex; justify-content: left;">Descripcion: {{ serviciosPorId['0'].detalle }}</h6>
+         <h6 style="display: flex; justify-content: left;">Descripción: {{ serviciosPorId['0'].detalle }}</h6>
          </div>
 
           <div style="margin-top:20px">

@@ -5,7 +5,7 @@
       <h2>Mis Servicios</h2>
     </div>
     <b-container>
-        <div v-on="msg"></div>
+       
       <b-row>
         <b-col
           v-for="servicio in servicios"
