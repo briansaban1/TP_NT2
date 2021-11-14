@@ -51,6 +51,7 @@ export default {
     };
   },
   mounted() {
+    //Se obtiene el usuario del local storage
     this.usuario = JSON.parse(window.localStorage.getItem("userData"));
     console.log(this.usuario);
   },
