@@ -29,10 +29,6 @@
       </div>
     </div>
     <div v-else>
-   <div style="margin: 20px">
-      <router-link to="/ServiciosFavoritos" class="btn btn-primary btn-block"
-          >Servicios Favoritos</router-link>
-    </div>
 
     </div>
 

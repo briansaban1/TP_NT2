@@ -12,7 +12,6 @@ import DetalleServicio from '../views/DetalleServicio.vue'
 import MisServicios from '../views/MisServicios.vue'
 import EliminarServicio from '../views/EliminarServicio.vue'
 import ModificarDatos from '../views/ModificarDatos.vue'
-import ServiciosFavoritos from '../views/ServiciosFavoritos.vue'
 
 
 Vue.use(VueRouter)
@@ -117,14 +116,7 @@ export default new VueRouter ({
     // which is lazy-loaded when the route is visited.
     component: ModificarDatos
   },
-  {
-    path: '/serviciosfavoritos',
-    name: 'ServiciosFavoritos',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: ServiciosFavoritos
-  }
+
 ]
 
 
