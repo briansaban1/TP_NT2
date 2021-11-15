@@ -5,7 +5,7 @@
         <h3 style="margin: 20px">Actualizá tus datos</h3>
 
         <b-form-group>
-          <label style="justify-content: left; display: flex"
+          <label id="textos" 
             >Nombre de Usuario</label
           >
           <b-input
@@ -18,7 +18,7 @@
         </b-form-group>
 
         <b-form-group>
-          <label style="justify-content: left; display: flex">Email</label>
+          <label id="textos">Email</label>
           <input
             type="email"
             class="form-control"
@@ -28,7 +28,7 @@
         </b-form-group>
 
         <b-form-group>
-          <label style="justify-content: left; display: flex">Nombre</label>
+          <label id="textos">Nombre</label>
           <input
             type="text"
             class="form-control"
@@ -39,7 +39,7 @@
         </b-form-group>
 
         <b-form-group>
-          <label style="justify-content: left; display: flex">Apellido</label>
+          <label id="textos">Apellido</label>
           <input
             type="text"
             class="form-control"
@@ -49,7 +49,7 @@
         </b-form-group>
 
         <b-form-group>
-          <label style="justify-content: left; display: flex"
+          <label id="textos"
             >Seleccioná un tipo de usuario</label
           >
           <select class="form-control" v-model="usuario.tipo">
@@ -63,7 +63,7 @@
           <b>¡Datos actualizados correctamente!</b>
         </p>
 
-        <div style="margin: 20px; justify-content: center; display: flex">
+        <div id="boton">
           <b-button
             type="button"
             @click="
@@ -85,6 +85,15 @@
     <router-view />
   </div>
 </template>
+
+<style scoped>
+#textos{
+    justify-content: left; display: flex
+}
+#boton{
+    margin: 20px; justify-content: center; display: flex
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -139,7 +148,7 @@ export default {
           window.localStorage.setItem("userData", JSON.stringify(res.data[0]));
         }
         //
-        
+
         console.log(this.servicios);
       } catch (error) {
         console.log(error);

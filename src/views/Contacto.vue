@@ -1,6 +1,6 @@
 <template>
 <div id="contact">
-   <b-container style="width: 1500px">
+<b-container style="width: 45%; margin-top:20px">
 <form
  id="app"
   @submit="checkForm"

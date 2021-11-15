@@ -1,21 +1,21 @@
 <template>
       <div style="display: flex; justify-content: center;">
  <div style="width:80%; margin:15px;" class="row">
-          <div style="width: 55%; margin-top:15px; display: flex; justify-content: right;">
-         <img style="max-width:85%; max-height:90%;" v-bind:src="`${serviciosPorId['0'].img}`" />
+          <div id="contenedor">
+         <img id="imagen" v-bind:src="`${serviciosPorId['0'].img}`" />
         </div>
          <div style="width: 45%;">
-             <div style="margin-top:20px; display: flex; justify-content: center;">
+             <div id="titulo">
          <h2> {{ serviciosPorId['0'].titulo }}</h2>
           </div>
-          <div style="margin-top:20px; width: 50%; margin-left: 90px">
-         <h5 style="display: flex; justify-content: left;">Detalle: {{ serviciosPorId['0'].descripcion }}</h5>
-         <h5 style="display: flex; justify-content: left;">Barrio: {{ serviciosPorId['0'].barrio }}</h5>
-         <h5 style="display: flex; justify-content: left;">Rubro: {{ serviciosPorId['0'].rubro }}</h5>
+          <div id="opciones" >
+         <h5 id="detalles">Detalle: {{ serviciosPorId['0'].descripcion }}</h5>
+         <h5 id="detalles">Barrio: {{ serviciosPorId['0'].barrio }}</h5>
+         <h5 id="detalles">Rubro: {{ serviciosPorId['0'].rubro }}</h5>
           </div>
 
-          <div style="margin-top:20px; width: 50%; margin-left: 90px">
-         <h6 style="display: flex; justify-content: left;">Descripción: {{ serviciosPorId['0'].detalle }}</h6>
+          <div id="opciones">
+         <h6 id="detalles">Descripción: {{ serviciosPorId['0'].detalle }}</h6>
          </div>
 
           <div style="margin-top:20px">
@@ -32,7 +32,23 @@
 
 <style >
 #titulo {
-  margin-top: 25px;
+  margin-top:20px;
+   display: flex;
+   justify-content: center;
+}
+#opciones{
+margin-top:20px;
+ width: 50%;
+  margin-left: 90px
+}
+#detalles{
+    display: flex; justify-content: left;
+}
+#contenedor{
+    width: 55%; margin-top:15px; display: flex; justify-content: right;
+}
+#imagen{
+    max-width:85%; max-height:90%;
 }
 </style>
 

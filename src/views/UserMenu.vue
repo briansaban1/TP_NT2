@@ -6,15 +6,15 @@
     <p>Bienvenido a tu cuenta de ORTYFY-Service</p>
 
     <div style="justify-content: left;">
-      <p style="display: flex; justify-content: left; margin-left: 20px">Nombre: {{ usuario.nombre }}</p>
-      <p style="display: flex; justify-content: left;margin-left: 20px">Apellido: {{ usuario.apellido }}</p>
-      <p style="display: flex; justify-content: left;margin-left: 20px">Email: {{ usuario.email }}</p>
-      <p style="display: flex; justify-content: left;margin-left: 20px">Usuario: {{ usuario.user }}</p>
-      <p style="display: flex; justify-content: left;margin-left: 20px">Tipo: {{ usuario.tipo }}</p>
+      <p id="detalleuser">Nombre: {{ usuario.nombre }}</p>
+      <p id="detalleuser" >Apellido: {{ usuario.apellido }}</p>
+      <p id="detalleuser" >Email: {{ usuario.email }}</p>
+      <p id="detalleuser" >Usuario: {{ usuario.user }}</p>
+      <p id="detalleuser" >Tipo: {{ usuario.tipo }}</p>
       </div>
 </b-container>
-<b-container style="width: 300px; margin-top:15px; margin-left: 20px">
-    <div v-if="usuario.tipo == 'vendedor'">
+<b-container id="contenedorboton">
+    <div v-if="usuario.tipo == 'Vendedor'">
       <div style="margin: 20px">
         <router-link to="/CrearServicio" class="btn btn-primary btn-block"
           >Crear Servicio</router-link>
@@ -49,6 +49,15 @@
     
   </div>
 </template>
+
+<style scoped>
+#detalleuser{
+  display: flex; justify-content: left;margin-left: 20px
+}
+#contenedorboton{
+width: 300px; margin-top:15px; margin-left: 20px
+}
+</style>
 
 <script>
 export default {
