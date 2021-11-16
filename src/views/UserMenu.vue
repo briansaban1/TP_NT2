@@ -41,7 +41,7 @@
           </div>
         </div>
         <div v-else>
-          <div style="justify-content: left">
+          <div style="justify-content: left;">
             <p id="detalleuser">Nombre: {{ usuario.nombre }}</p>
             <p id="detalleuser">Apellido: {{ usuario.apellido }}</p>
             <p id="detalleuser">Email: {{ usuario.email }}</p>
@@ -71,7 +71,7 @@
           </div>
         </div>
 
-        <div v-if="!usuario.tipo == 'Administrador'">
+        <div v-if="usuario.tipo == 'Vendedor' || usuario.tipo == 'Comprador'">
           <div style="margin: 20px">
             <router-link to="/ModificarDatos" class="btn btn-primary btn-block"
               >Modificar Datos</router-link
