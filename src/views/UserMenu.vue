@@ -150,7 +150,6 @@ export default {
       }
     }
   },
-<<<<<<< HEAD
   computed: {
     ObtenerMayor() {
       let max = 0;
@@ -179,11 +178,6 @@ export default {
     },
     totalUsuarios() {
       return this.usuarios;
-=======
-computed: {
-ObtenerMayor(){
-  return Math.max(this.servicios.mascontratado, this.servicios)
->>>>>>> 25c1794580b8470e60ea6a08d96b2a94a5b1f6eb
     }
   },
   created() {
