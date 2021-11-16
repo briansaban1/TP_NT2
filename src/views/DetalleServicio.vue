@@ -19,7 +19,7 @@
          </div>
 
           <div style="margin-top:20px">
-        <b-button @click="goToWsp(serviciosPorId['0'].telefono)" variant="outline-primary">Contactar Anuncio</b-button>
+        <b-button @click="goToWsp(serviciosPorId['0'].telefono) & agregarContratacion(serviciosPorId['0'].id, serviciosPorId['0'].mascontratado)" variant="outline-primary">Contactar Anuncio</b-button>
           </div>
 
            </div>
@@ -66,6 +66,7 @@ data() {
     return {
 
       serviciosPorId: [],
+      num:0
     };
   },
   
@@ -76,6 +77,24 @@ data() {
       try {
         const url = `https://618072ba8bfae60017adfaec.mockapi.io/servicio?id=${ids}`
         const response = await axios.get(url);
+        this.serviciosPorId = response.data;
+        console.log(this.serviciosPorId);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async agregarContratacion(ids, mascontratado) {
+      try {
+
+const i = Number(mascontratado) + 1
+console.log(i)
+        const datosUpdate = {
+          mascontratado: i
+
+        };
+
+        const url = `https://618072ba8bfae60017adfaec.mockapi.io/servicio/${ids}`;
+        const response = await axios.put(url, datosUpdate);
         this.serviciosPorId = response.data;
         console.log(this.serviciosPorId);
       } catch (error) {
