@@ -45,7 +45,7 @@
         </div>
       </b-container>
       <b-container id="contenedorboton">
-        <div v-if="usuario.tipo == 'Vendedor'">
+        <div v-if="usuario.tipo == 'Vendedor' || usuario.tipo == 'Administrador'">
           <div style="margin: 20px">
             <router-link to="/CrearServicio" class="btn btn-primary btn-block"
               >Crear Servicio</router-link

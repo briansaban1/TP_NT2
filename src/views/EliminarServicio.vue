@@ -56,10 +56,15 @@ export default {
     };
   },
   methods: {
-    async getServicios(user) {
+    async getServicios(usuario) {
       try {
-         
-        const url = `https://618072ba8bfae60017adfaec.mockapi.io/servicio?usuario=${user}`
+        console.log("USUARIOOO",usuario)
+        let url = `https://618072ba8bfae60017adfaec.mockapi.io/servicio?usuario=${usuario.user}`
+
+        if(usuario.tipo == "Administrador"){
+            url = `https://618072ba8bfae60017adfaec.mockapi.io/servicio`
+        }
+        
         const response = await axios.get(url);
         this.servicios = response.data;
         console.log(this.servicios);
@@ -80,7 +85,7 @@ async eliminarServicio(id) {
         console.log(msg)
 
         //se vuelve a llamar a la funcion para obtener nuevamente los servicios
-        this.getServicios(this.usuario.user);
+        this.getServicios(this.usuario);
         //
       } catch (error) {
         console.log(error);
@@ -121,9 +126,7 @@ mounted() {
     //Se obtiene el usuario del local storage
     this.usuario = JSON.parse(window.localStorage.getItem("userData"));
     console.log(this.usuario);
-        this.getServicios(this.usuario.user);
- console.log(this.usuario.user)
-
+        this.getServicios(this.usuario);
   },
 };
 </script>
