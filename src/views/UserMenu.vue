@@ -7,24 +7,25 @@
 
         <div v-if="usuario.tipo == 'Administrador'">
           <div>
-              <div class="alert alert-success" role="alert">
-            El servicio más contratado fue: {{ ObtenerMayor.titulo }} , Rubro:
+            <div class="alert alert-success" role="alert">
+              El servicio más contratado fue: {{ ObtenerMayor.titulo }} , Rubro:
               {{ ObtenerMayor.rubro }}, Barrio: {{ ObtenerMayor.barrio }},
               Cantrataciones: {{ ObtenerMayor.mascontratado }}
             </div>
-              
           </div>
 
           <div class="alert alert-info" role="alert">
-          <div class="servicios">
-            Total de servicios por Barrio y/o Rubro
-            <ImgServicio
-              v-on:update:rubro="rubro = $event"
-              v-on:update:barrio="barrio = $event"
-            />
-            <strong>El barrio: {{ barrio }}, de rubro: {{ rubro }}, tiene
-            {{ filteredServices.length }} Servicios en total.</strong>
-          </div>
+            <div class="servicios">
+              Total de servicios por Barrio y/o Rubro
+              <ImgServicio
+                v-on:update:rubro="rubro = $event"
+                v-on:update:barrio="barrio = $event"
+              />
+              <strong
+                >El barrio: {{ barrio }}, de rubro: {{ rubro }}, tiene
+                {{ filteredServices.length }} Servicios en total.</strong
+              >
+            </div>
           </div>
 
           <div>
@@ -149,6 +150,7 @@ export default {
       }
     }
   },
+<<<<<<< HEAD
   computed: {
     ObtenerMayor() {
       let max = 0;
@@ -177,6 +179,11 @@ export default {
     },
     totalUsuarios() {
       return this.usuarios;
+=======
+computed: {
+ObtenerMayor(){
+  return Math.max(this.servicios.mascontratado, this.servicios)
+>>>>>>> 25c1794580b8470e60ea6a08d96b2a94a5b1f6eb
     }
   },
   created() {
