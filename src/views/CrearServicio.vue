@@ -29,10 +29,21 @@
           <div class="form-group">
             <label for="message">Detalle</label>
             <textarea
+            type="text"
               class="form-control"
               id="detalle"
               v-model="detalle"
               placeholder="Ingresá el detalle"
+            />
+          </div>
+        <div class="form-group">
+            <label for="message">Número whatsapp</label>
+            <input
+              type="number"
+              class="form-control"
+              id="number"
+              v-model="telefono"
+              placeholder="Ingresá el teléfono"
             />
           </div>
           <div class="form-group">
@@ -142,6 +153,7 @@ export default {
       rubro: "",
       image: "",
       barrio: "",
+      telefono: "",
       msg: false,
     };
   },
@@ -165,7 +177,8 @@ export default {
             rubro: this.rubro,
             img: this.image,
             barrio: this.barrio,
-            usuario: this.usuario.user
+            telefono: this.telefono,
+            usuario: this.usuario.user,
           }
         );
         console.log("TEST RESULT ",result);
