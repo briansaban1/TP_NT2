@@ -1,6 +1,6 @@
 <template>
   <div id="userMenu">
-    <div class="row" style="width: 100%">
+    <div class="row" style="width: 100%; ">
       <b-container style="width: 1000px; margin-top: 25px">
         <h1>Hola, {{ usuario.user }}!</h1>
         <p>Bienvenido a tu cuenta de ORTYFY-Service</p>
@@ -8,29 +8,35 @@
         <div v-if="usuario.tipo == 'Administrador'">
           <div>
             <div class="alert alert-success" role="alert">
-              El servicio más contratado fue: {{ ObtenerMayor.titulo }} , Rubro:
-              {{ ObtenerMayor.rubro }}, Barrio: {{ ObtenerMayor.barrio }},
-              Cantrataciones: {{ ObtenerMayor.mascontratado }}
+              El servicio más contratado fue:  <strong>{{ ObtenerMayor.titulo }}</strong>, perteneciente al rubro:
+               <strong>{{ ObtenerMayor.rubro }}</strong>, ubicado en el barrio:  <strong>{{ ObtenerMayor.barrio }} </strong>
+              <div> Tuvo un total de
+               <strong>{{ ObtenerMayor.mascontratado }}</strong> contrataciones
+            </div>
             </div>
           </div>
 
           <div class="alert alert-info" role="alert">
-            <div class="servicios">
-              Total de servicios por Barrio y/o Rubro
+            <div class="servicios" >
+              <div style="margin-top:5px; margin-bottom:10px">
+               <h4> Total de servicios por Barrio y/o Rubro</h4>
+                </div>
               <ImgServicio
                 v-on:update:rubro="rubro = $event"
                 v-on:update:barrio="barrio = $event"
               />
+              <div style="margin-top:15px; margin-bottom:5px">
               <strong
-                >El barrio: {{ barrio }}, de rubro: {{ rubro }}, tiene
-                {{ filteredServices.length }} Servicios en total.</strong
+                >El barrio de: "<strong>{{ barrio }}</strong>", perteneciente al rubro: "<strong>{{ rubro }}</strong>", tiene
+                <strong>{{ filteredServices.length }}</strong> Servicios en total.</strong
               >
+              </div>
             </div>
           </div>
 
           <div>
             <div class="alert alert-danger" role="alert">
-              Cantidad de usuarios registrados: {{ totalUsuarios }}
+              Cantidad de usuarios registrados: <strong>{{ totalUsuarios }}</strong>
             </div>
           </div>
         </div>
@@ -94,6 +100,7 @@
   margin-top: 15px;
   margin-left: 20px;
 }
+
 </style>
 
 <script>

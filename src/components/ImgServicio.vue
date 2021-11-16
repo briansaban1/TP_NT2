@@ -73,7 +73,7 @@
             <option selected="true">Todos</option>
             <option>Plomería</option>
             <option>Electricista</option>
-            <option>Carpiteria</option>
+            <option>Carpinteria</option>
           </select>
         </b-form-group>
 
