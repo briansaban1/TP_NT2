@@ -8,7 +8,7 @@
     <div v-if="usuario.tipo == 'Administrador'">
 
 <div>
-<p id="detalleuser">El servicio más contratado fue: {{ObtenerMayor() }}</p>
+<p id="detalleuser">El servicio más contratado fue: {{ObtenerMayor }}</p>
 </div>
 
 <div>
@@ -112,10 +112,7 @@ export default {
   },
 computed: {
 ObtenerMayor(){
-  const max = Math.max(this.servicios.mascontratado)
-  return  max
-
-      
+  return Math.max(this.servicios.mascontratado, this.servicios)
     }
 },
   created() {
