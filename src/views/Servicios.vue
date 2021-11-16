@@ -1,7 +1,7 @@
 <template>
   <div class="servicios">
     <ImgServicio v-on:update:rubro="rubro = $event" v-on:update:barrio="barrio = $event"/>
-    <div>
+    <div style="margin-top:20px">
       <h3>Listado de Servicios</h3>
 
     <b-container>
